@@ -10,8 +10,7 @@ return (
  <AddAmbassadorButton/>
  </div>
  <AmbassadorList/>
-  {/* <EmployeeCard /> */}
-  {/* <ComponentExample /> */}
+
 </div>
 )
 ;

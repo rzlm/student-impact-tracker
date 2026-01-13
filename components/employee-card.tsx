@@ -6,7 +6,7 @@ import { TrophyIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { EllipsisVertical } from 'lucide-react'
 import {DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuShortcut, DropdownMenuTrigger } from './ui/dropdown-menu'
-
+import AwardPointsButton from "@/components/award-points-button"
 const EmployeeCard = (ambassador:Ambassador, onDelete ) => {
 
   return (
@@ -41,9 +41,8 @@ const EmployeeCard = (ambassador:Ambassador, onDelete ) => {
         </CardHeader>
 
         <div className='flex p-4 items-left'>
-            <Button className='hover:cursor-pointer rounded-lg px-4'>
-                Award Points
-            </Button>
+            <AwardPointsButton/>
+           
         </div>
       </Card>
 )

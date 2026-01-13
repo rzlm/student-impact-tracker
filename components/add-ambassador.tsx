@@ -19,14 +19,14 @@ const AddAmbassadorButton = () => {
     const [formInfo, setFormInfo] = useState({
         firstName: "",
         lastName: "",
-        points: ""
+        role: ""
     })
 
     console.log(formInfo)
 
     const handleSubmit = () => {
         //push to list
-        
+
         //add to db here
     }
 
@@ -69,18 +69,19 @@ const AddAmbassadorButton = () => {
                   />
                 </Field>
                 
-                <Field>
-                  <FieldLabel htmlFor="points">Points</FieldLabel>
+              </div>
+
+              <Field>
+                  <FieldLabel htmlFor="points">Role</FieldLabel>
                   <Input
-                   type='number'
-                    id="initial-points"
-                    placeholder="Points"
-                    value={formInfo.points}
-                    onChange={(e) => setFormInfo({...formInfo, points: e.target.value})} 
+                   type='role'
+                    id="role"
+                    placeholder="ex. Social Media"
+                    value={formInfo.role}
+                    onChange={(e) => setFormInfo({...formInfo, role: e.target.value})} 
                     required
                   />
                 </Field>
-              </div>
           
               <Field orientation="horizontal">
               <AlertDialogCancel variant="outline" type="button">
