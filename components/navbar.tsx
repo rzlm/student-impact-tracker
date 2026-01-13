@@ -3,7 +3,7 @@
 import * as React from "react"
 import Link from "next/link"
 import { CircleCheckIcon, CircleHelpIcon, CircleIcon } from "lucide-react"
-
+import { signOut } from "@/actions"
 import { useIsMobile } from "@/components/hooks/use-mobile"
 import {
   NavigationMenu,
@@ -32,7 +32,7 @@ export function NavigationMenuDemo() {
         </NavigationMenuItem>
 
         <NavigationMenuItem>
-           <Button variant="outline">Sign out</Button>
+           <Button variant="outline" onClick={signOut} >Sign out</Button>
         </NavigationMenuItem>
 
     </NavigationMenu>
