@@ -1,6 +1,8 @@
 
 export type Ambassador = {
-    firstName: string,
-    lastName: string,
-    points: string
+    // id: number;
+    created_at: string;
+    first_name: string;
+    last_name: string;
+    role: string;
   }

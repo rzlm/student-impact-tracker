@@ -1,17 +1,47 @@
-import { ComponentExample } from "@/components/component-example";
-import EmployeeCard from "@/components/employee-card";
-import AddAmbassadorButton from "@/components/add-ambassador";
-import AmbassadorList from "@/components/ambassador-list";
-export default function Page() {
-return (
-<div className="flex flex-col items-center justify-center">
-  <h1 className="font-semibold text-xl p-8">StartUp Lab Student Ambassador Point Tracker</h1>
- <div className="items-left">
- <AddAmbassadorButton/>
- </div>
- <AmbassadorList/>
+    "use client"
+    import { ComponentExample } from "@/components/component-example";
+    import EmployeeCard from "@/components/employee-card";
+    import AddAmbassadorButton from "@/components/add-ambassador";
+    import AmbassadorList from "@/components/ambassador-list";
+    import { getAllAmbassadors } from "@/actions";
+    import { useState, useEffect } from "react";
+    import { Ambassador } from "@/lib/types";
 
-</div>
-)
-;
-}
+    export default function Page() {
+        const [ambassadorList, setAmbassadorList] = useState<Ambassador[]>([]);
+
+        useEffect(() => {
+            async function fetchAmbassadors() {
+                const res = await getAllAmbassadors();
+                if (res) {
+                    setAmbassadorList(res);
+                    console.log("d", res)
+                }
+            }
+            
+            fetchAmbassadors();
+            
+            console.log(ambassadorList)
+        }, []); 
+        const handleNewAmbassador = (newAmbassador: Ambassador) => {
+            setAmbassadorList(prev => [...prev, newAmbassador]);
+        }
+   
+   
+
+    return (
+
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="font-semibold text-xl p-8">
+        StartUp Lab Student Ambassador Point Tracker
+      </h1>
+      <div className="items-left">
+        <AddAmbassadorButton onAmbassadorAdded={handleNewAmbassador} />
+      </div>
+      <AmbassadorList ambassadors={ambassadorList} />
+    </div>
+    )
+    ;
+    
+
+    }

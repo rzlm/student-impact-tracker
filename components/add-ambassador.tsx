@@ -12,22 +12,39 @@ import {
   } from "@/components/ui/alert-dialog"
   import { Input } from "@/components/ui/input"
 import { Plus } from 'lucide-react'
+import { createAmbassador } from '@/actions'
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
+import { toast } from "sonner"
+import { Ambassador } from '@/lib/types'
 
-const AddAmbassadorButton = () => {
+interface AddAmbassadorButtonProps {
+    onAmbassadorAdded: (ambassador:any)=> void
+}
+
+const AddAmbassadorButton = ({ onAmbassadorAdded }: AddAmbassadorButtonProps) => {
    
     const [formInfo, setFormInfo] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         role: ""
     })
 
     console.log(formInfo)
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         //push to list
 
         //add to db here
+      const ambassador = await  createAmbassador(formInfo);
+     if (ambassador) {
+        toast("Ambassador has been created")
+        onAmbassadorAdded(formInfo)
+
+     } else {
+        toast("An error has occurred")
+     }
+
+    
     }
 
   return (
@@ -45,7 +62,7 @@ const AddAmbassadorButton = () => {
 
             <AlertDialogTitle>Add a New Ambassador</AlertDialogTitle>
              
-            <form>
+            <form >
             <FieldGroup>
               <div className="grid grid-cols-2 gap-4">
                 <Field>
@@ -53,8 +70,8 @@ const AddAmbassadorButton = () => {
                   <Input
                     id="first-name"
                     placeholder="First name"
-                    value={formInfo.firstName}
-                    onChange={(e) =>  setFormInfo({...formInfo, firstName: e.target.value} ) }
+                    value={formInfo.first_name}
+                    onChange={(e) =>  setFormInfo({...formInfo, first_name: e.target.value} ) }
                     required
                   />
                 </Field>
@@ -63,8 +80,8 @@ const AddAmbassadorButton = () => {
                   <Input
                     id="last-name"
                     placeholder="Last name"
-                    value={formInfo.lastName}
-                    onChange={(e) => setFormInfo({...formInfo, lastName: e.target.value})}
+                    value={formInfo.last_name}
+                    onChange={(e) => setFormInfo({...formInfo, last_name: e.target.value})}
                     required
                   />
                 </Field>
@@ -87,7 +104,10 @@ const AddAmbassadorButton = () => {
               <AlertDialogCancel variant="outline" type="button">
                   Cancel
                 </AlertDialogCancel>
-                <AlertDialogAction type="submit">Submit</AlertDialogAction>
+                <AlertDialogAction  type="submit" formAction={handleSubmit}>
+                        Submit
+                </AlertDialogAction>
+                    
               </Field>
             </FieldGroup>
           </form>
