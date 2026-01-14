@@ -57,11 +57,8 @@ export async function signup(formData: FormData) {
     redirect("/login")
   }
 
-
-
 export async function createAmbassador( ambassador:any ) {
 const supabase = await createClient()
-
  const {data, error } = await supabase
   .from('ambassadors')
   .insert({ first_name: ambassador.first_name, last_name: ambassador.last_name, role:ambassador.role  }) 
@@ -75,10 +72,10 @@ if (error) {
 
 }
 
-export async function deleteAmbassador(ambassadorId:string) {
-    const supabase = await createClient()
-
-    const { data, error } = await supabase
+export async function deleteAmbassador(ambassadorId:number) {
+  const supabase = await createClient()
+  console.log(ambassadorId)
+  const { error } = await supabase
   .from('ambassadors')
   .delete() 
   .eq('id', ambassadorId)
@@ -86,8 +83,9 @@ if (error) {
      console.log("An error occurred", error)
 } else {
     console.log("successful")
+    return true;
 }
-  return data;
+  return false;
 }
 //fetch all ambasadords
 
@@ -120,4 +118,34 @@ export async function getAllAmbassadors() {
 //   return data;
 // }
 
+
+//Add points
+export async function addPointsById(id:number) {
+    const supabase = await createClient()
+    const {error} = await supabase
+    .from('points')
+    .insert()
+    .select()
+    if (error) {
+      console.log("An error has occurred", error)
+    }
+}
+
+//fetch points
+
+export async function PointsById(id:number) {
+  const supabase = await createClient()
+  const {error} = await supabase
+  .from('points')
+  .select()
+  .eq('id', id )
+  if (error) {
+    console.log("An error has occurred", error)
+  }
+}
+
+
+export async function removePoints() {
+
+}
 

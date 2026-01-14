@@ -27,7 +27,10 @@
             setAmbassadorList(prev => [...prev, newAmbassador]);
         }
    
-   
+        const handleDeleteAmbassador = (id: number) => {
+            setAmbassadorList(prev => prev.filter(ambassador => ambassador.id !== id));
+        }
+    
 
     return (
 
@@ -38,7 +41,7 @@
       <div className="items-left">
         <AddAmbassadorButton onAmbassadorAdded={handleNewAmbassador} />
       </div>
-      <AmbassadorList ambassadors={ambassadorList} />
+      <AmbassadorList ambassadors={ambassadorList} onDelete={handleDeleteAmbassador} />
     </div>
     )
     ;

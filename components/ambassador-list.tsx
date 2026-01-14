@@ -4,14 +4,22 @@ import type { Ambassador } from '@/lib/types'
 
 type AmbassadorListProps = {
   ambassadors: Ambassador[]
+  onDelete: (id: number) => void;
+  
 }
 
-const AmbassadorList = ({ ambassadors }: AmbassadorListProps) => {
+const AmbassadorList = ({ ambassadors, onDelete }: AmbassadorListProps) => {
   return (
     <div className="flex flex-col items-center gap-4 w-full">
-      {(ambassadors ?? []).map((ambassador, index) => (
-        <EmployeeCard key={index} {...ambassador}  />
-      ))}
+      {ambassadors.length > 0 ? (ambassadors ).map((ambassador, index) => (
+        <EmployeeCard key={index} {...ambassador} onDelete={onDelete}  />
+      )): (
+        <div className='w-full bg-gray-50 h-60 rounded-md m-8 flex items-center justify-center text-lg text-gray-500'>
+          No ambassadors have been added yet
+        </div>
+      )
+    
+    }
     </div>
   )
 }
