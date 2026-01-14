@@ -120,11 +120,11 @@ export async function getAllAmbassadors() {
 
 
 //Add points
-export async function addPointsById(id:number) {
+export async function addPointsById(id:number, points:number) {
     const supabase = await createClient()
     const {error} = await supabase
     .from('points')
-    .insert()
+    .insert({ambassador_id:id, points:points})
     .select()
     if (error) {
       console.log("An error has occurred", error)
@@ -133,15 +133,22 @@ export async function addPointsById(id:number) {
 
 //fetch points
 
-export async function PointsById(id:number) {
+export async function getPointsById(id:number) {
   const supabase = await createClient()
-  const {error} = await supabase
+  let totalPoints = 0
+  const {data, error} = await supabase
   .from('points')
   .select()
-  .eq('id', id )
+  .eq('ambassador_id', id )
   if (error) {
     console.log("An error has occurred", error)
   }
+  if ( data) {
+    totalPoints = data.reduce((sum, record) => sum + record.points, 0)
+  } else {
+    totalPoints = 0
+  } 
+  return totalPoints;
 }
 
 

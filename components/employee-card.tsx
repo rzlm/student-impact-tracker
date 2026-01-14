@@ -1,5 +1,5 @@
 "use client"
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Card,
   CardHeader,
@@ -11,6 +11,7 @@ import type { Ambassador } from '@/lib/types'
 import { TrophyIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { EllipsisVertical } from 'lucide-react'
+import { getPointsById } from '@/actions'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -43,6 +44,22 @@ const EmployeeCard = ({
     }
   };
 
+  const [points, setPoints] = useState(0)
+
+
+useEffect(() => {
+    async function getPoints() {
+        const res = await getPointsById(id);
+        if (res) {
+            setPoints(res);
+            console.log("d", res)
+        }
+    }
+    
+    getPoints();
+    
+}, []); 
+
   return (
     <Card className="relative w-full max-w-4xl overflow-hidden">
       <div className="" />
@@ -55,7 +72,7 @@ const EmployeeCard = ({
             <div className="p-3 bg-indigo-400 rounded-full w-fit">
               <TrophyIcon className="w-5 h-5 text-white" />
             </div>
-            <p className="text-black font-semibold text-lg">100</p>
+            <p className="text-black font-semibold text-lg">{points}</p>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">

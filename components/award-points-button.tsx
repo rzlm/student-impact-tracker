@@ -6,6 +6,8 @@ import { FieldGroup, FieldLabel, Field } from './ui/field'
 import { Input } from './ui/input'
 import { Plus } from 'lucide-react'
 import {Minus} from 'lucide-react'
+import { addPointsById } from '@/actions'
+import {toast} from "sonner"
 import {
     Dialog,
     DialogContent,
@@ -15,7 +17,11 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
-const AwardPointsButton = (employeeId ) => {
+interface AwardPointsButtonProps  {
+    employeeId: number
+}
+
+const AwardPointsButton: React.FC<AwardPointsButtonProps> = ({ employeeId }) => {
     const [points, setPoints] = useState(0)
     const [additionalPoints, setAdditionalPoints] = useState(false)
     const [pointInfo, setPointInfo] = useState(
@@ -26,6 +32,14 @@ const AwardPointsButton = (employeeId ) => {
         numConsultingMembers: 0
        }
     )
+
+    async function handleInsertPoints() {
+        const res = await addPointsById(employeeId, points)
+        toast("Successfully Added points!")
+
+    }
+
+
   
 
   return (
@@ -125,7 +139,7 @@ const AwardPointsButton = (employeeId ) => {
           Cancel
         </Button>
         </DialogClose>
-        <Button type="submit">
+        <Button type="submit" formAction={handleInsertPoints}>
           Award {points} points
         </Button>
       </Field>
