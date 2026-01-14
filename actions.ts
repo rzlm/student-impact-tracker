@@ -74,18 +74,30 @@ if (error) {
 
 export async function deleteAmbassador(ambassadorId:number) {
   const supabase = await createClient()
-  console.log(ambassadorId)
-  const { error } = await supabase
-  .from('ambassadors')
-  .delete() 
-  .eq('id', ambassadorId)
-if (error) {
-     console.log("An error occurred", error)
-} else {
+  // Delete all entries in the points table first
+  const { error: pointsError } = await supabase
+    .from('points')
+    .delete()
+    .eq('ambassador_id', ambassadorId )
+
+  if (pointsError) {
+    console.log("An error occurred (deleting points):", pointsError)
+    return false; 
+  }
+
+  // Delete ambassador
+  const { error: ambassadorError } = await supabase
+    .from('ambassadors')
+    .delete() 
+    .eq('id', ambassadorId)
+
+  if (ambassadorError) {
+    console.log("An error occurred (deleting ambassador):", ambassadorError)
+    return false;
+  } else {
     console.log("successful")
     return true;
-}
-  return false;
+  }
 }
 //fetch all ambasadords
 

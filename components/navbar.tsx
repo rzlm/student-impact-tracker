@@ -27,13 +27,13 @@ export function NavigationMenuDemo() {
 
   return (
     <NavigationMenu viewport={isMobile} className=" flex flex-row justify-between">
-        <NavigationMenuItem className="p-4 text-lg">
+        <NavigationMenuItem className="p-4 text-lg self-start">
            <NavigationMenuLink className="text-lg"> StartUp Lab </NavigationMenuLink>
         </NavigationMenuItem>
 
-        <NavigationMenuItem>
+        {/* <NavigationMenuItem className="">  */}
            <Button variant="outline" onClick={signOut} >Sign out</Button>
-        </NavigationMenuItem>
+        {/* </NavigationMenuItem> */}
 
     </NavigationMenu>
   )

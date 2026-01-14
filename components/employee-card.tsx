@@ -61,7 +61,7 @@ useEffect(() => {
 }, []); 
 
   return (
-    <Card className="relative w-full max-w-4xl overflow-hidden">
+    <Card className="relative w-full max-w-4xl overflow-hidden rounded-md">
       <div className="" />
       <CardHeader>
         <div className="flex flex-row justify-between">
@@ -97,7 +97,7 @@ useEffect(() => {
         </CardDescription>
       </CardHeader>
 
-      <div className="flex p-4 items-left">
+      <div className="flex px-4 pb-4 self-end">
         <AwardPointsButton employeeId={id} />
       </div>
     </Card>
