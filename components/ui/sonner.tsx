@@ -18,15 +18,10 @@ const Toaster = ({ ...props }: ToasterProps) => {
       theme={theme as ToasterProps["theme"]}
       className="toaster group"
       icons={{
-        // @ts-expect-error - React 19 type compatibility issue with lucide-react
         success: <CircleCheckIcon className="size-4" />,
-        // @ts-expect-error - React 19 type compatibility issue with lucide-react
         info: <InfoIcon className="size-4" />,
-        // @ts-expect-error - React 19 type compatibility issue with lucide-react
         warning: <TriangleAlertIcon className="size-4" />,
-        // @ts-expect-error - React 19 type compatibility issue with lucide-react
         error: <OctagonXIcon className="size-4" />,
-        // @ts-expect-error - React 19 type compatibility issue with lucide-react
         loading: <Loader2Icon className="size-4 animate-spin" />,
       }}
       style={

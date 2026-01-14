@@ -34,11 +34,11 @@
 
     return (
 
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="font-semibold text-xl p-8">
+    <div className="flex flex-col items-center justify-center max-w-4xl mx-auto">
+      <h1 className="font-semibold text-xl py-8 md:self-start">
         StartUp Lab Student Ambassador Point Tracker
       </h1>
-      <div className="items-left">
+      <div className="md:self-end ">
         <AddAmbassadorButton onAmbassadorAdded={handleNewAmbassador} />
       </div>
       <AmbassadorList ambassadors={ambassadorList} onDelete={handleDeleteAmbassador} />

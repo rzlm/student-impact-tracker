@@ -53,7 +53,6 @@ const AddAmbassadorButton = ({ onAmbassadorAdded }: AddAmbassadorButtonProps) =>
          <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button size="lg">
-                {/* @ts-expect-error - */}
                 <Plus className="w-4 h-4" />
                 Add ambassador
               </Button>
