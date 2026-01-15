@@ -11,7 +11,7 @@ import type { Ambassador } from '@/lib/types'
 import { TrophyIcon } from 'lucide-react'
 import { Button } from './ui/button'
 import { EllipsisVertical } from 'lucide-react'
-import { getPointsById } from '@/actions'
+// import { getPointsById } from '@/actions'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -32,36 +32,37 @@ const EmployeeCard = ({
   first_name,
   last_name,
   role,
+  points,
   onDelete,
 }: EmployeeCardProps) => {
 
   const handleDelete = async () => {
-    toast("Ambassador has been deleted");
     const res = await deleteAmbassador(id);
+    onDelete?.(id);
+
     if (res) {
       toast("Ambassador has been deleted");
-      onDelete?.(id);
     }
   };
 
-  const [points, setPoints] = useState(0)
+ // const [points, setPoints] = useState(0)
 
 
-useEffect(() => {
-    async function getPoints() {
-        const res = await getPointsById(id);
-        if (res) {
-            setPoints(res);
-            console.log("d", res)
-        }
-    }
+// useEffect(() => {
+//     async function getPoints() {
+//         const res = await getPointsById(id);
+//         if (res) {
+//             setPoints(res);
+//             console.log("d", res)
+//         }
+//     }
     
-    getPoints();
+//     getPoints();
     
-}, []); 
+// }, []); 
 
   return (
-    <Card className="relative w-full max-w-4xl overflow-hidden rounded-md">
+    <Card className="relative w-full max-w-4xl  rounded-md max-h-48">
       <div className="" />
       <CardHeader>
         <div className="flex flex-row justify-between">

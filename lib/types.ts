@@ -5,4 +5,5 @@ export type Ambassador = {
     first_name: string;
     last_name: string;
     role: string;
+    points: number;
   }

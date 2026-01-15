@@ -26,7 +26,8 @@ const AddAmbassadorButton = ({ onAmbassadorAdded }: AddAmbassadorButtonProps) =>
     const [formInfo, setFormInfo] = useState({
         first_name: "",
         last_name: "",
-        role: ""
+        role: "",
+        points:0
     })
 
     console.log(formInfo)
