@@ -7,7 +7,6 @@
     import { useState, useEffect } from "react";
     import { Ambassador } from "@/lib/types";
     import { StatsCards } from "@/components/stats-cards";
-import { Card, CardTitle } from "@/components/ui/card";
 
     export default function Page() {
         const [ambassadorList, setAmbassadorList] = useState<Ambassador[]>([]);
@@ -29,6 +28,7 @@ import { Card, CardTitle } from "@/components/ui/card";
                     console.log("d", res)
                     if (numAmbassadors > 0) {
                         setAvgPoints(totalPoints/numAmbassadors)
+                        console.log(avgPoints)
                     } else {
                         setAvgPoints(0)
                     }
@@ -51,7 +51,7 @@ import { Card, CardTitle } from "@/components/ui/card";
     return (
 
     <div className="flex flex-col items-center justify-center max-w-4xl mx-auto">
-      <h1 className="font-semibold text-xl py-8 md:self-start">
+      <h1 className="font-semibold text-xl py-8 md:self-start text-primary">
         StartUp Lab Student Ambassador Point Tracker
       </h1>
       <div className="w-full">

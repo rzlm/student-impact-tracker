@@ -26,13 +26,13 @@ export function NavigationMenuDemo() {
   const isMobile = useIsMobile()
 
   return (
-    <NavigationMenu viewport={isMobile} className=" flex flex-row justify-between">
+    <NavigationMenu viewport={isMobile} className=" flex flex-row justify-between bg-primary w-full">
         <NavigationMenuItem className="p-4 text-lg self-start">
-           <NavigationMenuLink className="text-lg"> StartUp Lab </NavigationMenuLink>
+           <NavigationMenuLink className="text-xl font-bold text-white "> StartUp Lab Point Tracker</NavigationMenuLink>
         </NavigationMenuItem>
 
         {/* <NavigationMenuItem className="">  */}
-           <Button variant="outline" onClick={signOut} >Sign out</Button>
+           <Button variant="ghost" className="text-amber-400 text-lg mr-8" onClick={signOut} >Sign out</Button>
         {/* </NavigationMenuItem> */}
 
     </NavigationMenu>

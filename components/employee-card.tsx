@@ -22,6 +22,7 @@ import {
 import AwardPointsButton from "@/components/award-points-button"
 import { deleteAmbassador } from '@/actions'
 import { toast } from "sonner"
+import { AlertDialog } from './ui/alert-dialog'
 
 type EmployeeCardProps = Ambassador & {
   onDelete?: (id: number) => void
@@ -62,18 +63,18 @@ const EmployeeCard = ({
 // }, []); 
 
   return (
-    <Card className="relative w-full max-w-4xl  rounded-md max-h-48">
+    <Card className="relative w-full max-w-4xl  rounded-lg max-h-48 border-1 border-primary shadow-lg  shadow-gray-200 ">
       <div className="" />
       <CardHeader>
         <div className="flex flex-row justify-between">
-          <CardTitle className="text-2xl font-bold">
+          <CardTitle className="text-2xl font-bold text-primary">
             {first_name || 'John'} {last_name || 'Doe'}
           </CardTitle>
           <div className="flex flex-row items-center justify-center gap-2">
-            <div className="p-3 bg-indigo-400 rounded-full w-fit">
-              <TrophyIcon className="w-5 h-5 text-white" />
+            <div className="p-3 bg-primary rounded-full w-fit">
+              <TrophyIcon className="w-5 h-5 text-amber-400" />
             </div>
-            <p className="text-black font-semibold text-lg">{points}</p>
+            <p className=" font-semibold text-lg text-primary">{points}</p>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="icon">
@@ -88,6 +89,9 @@ const EmployeeCard = ({
                   onClick={handleDelete}
                   className="text-md text-red-600">
                   Delete
+                  <AlertDialog>
+                    
+                  </AlertDialog>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>

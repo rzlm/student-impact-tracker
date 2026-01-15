@@ -34,34 +34,34 @@ export function StatsCards({ totalAmbassadors, totalPoints, avgPoints, topPerfor
       color: "from-green-500 to-emerald-500",
       bgColor: "from-green-50 to-emerald-50",
     },
-    // {
-    //   title: "Top Performer",
-    //   value: topPerformer?.name || "N/A",
-    //   description: topPerformer ? `${topPerformer.points} points` : "No data yet",
-    //   icon: Award,
-    //   color: "from-purple-500 to-pink-500",
-    //   bgColor: "from-purple-50 to-pink-50",
-    // },
+     {
+       title: "Top Performer",
+       value: topPerformer?.name || "N/A",
+       description: topPerformer ? `${topPerformer.points} points` : "No data yet",
+       icon: Award,
+      color: "from-purple-500 to-pink-500",
+    bgColor: "from-purple-50 to-pink-50",
+    },
   ]
 
   return (
-    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 ">
       {stats.map((stat) => {
         const Icon = stat.icon
         return (
-          <Card key={stat.title} className="relative overflow-hidden">
+          <Card key={stat.title} className="relative overflow-hidden bg-violet-100 border-primary border-1">
             <div
               className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${stat.bgColor} rounded-full -mr-16 -mt-16 opacity-50`}
             />
             <CardHeader className="flex flex-row items-center justify-between pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+              <CardTitle className="text-md font-medium text-muted-foreground text-primary ">{stat.title}</CardTitle>
               <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${stat.color} flex items-center justify-center`}>
                 <Icon className="w-4 h-4 text-white" />
               </div>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stat.value}</div>
-              <p className="text-xs text-muted-foreground mt-1">{stat.description}</p>
+              <div className="text-2xl font-bold text-primary">{stat.value}</div>
+              <p className="text-xs text-muted-foreground mt-1 text-primary">{stat.description}</p>
             </CardContent>
           </Card>
         )
