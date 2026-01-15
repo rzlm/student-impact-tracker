@@ -1,9 +1,7 @@
     "use client"
-    import { ComponentExample } from "@/components/component-example";
-    import EmployeeCard from "@/components/employee-card";
     import AddAmbassadorButton from "@/components/add-ambassador";
     import AmbassadorList from "@/components/ambassador-list";
-    import { getAllAmbassadors, getTotalAmbassadorPoints } from "@/lib/supabase/actions";
+    import { getAllAmbassadors } from "@/lib/supabase/actions";
     import { useState, useEffect } from "react";
     import { Ambassador } from "@/lib/types";
     import { StatsCards } from "@/components/stats-cards";
@@ -13,6 +11,8 @@
         const [numAmbassadors, setNumAmbassadors] = useState(0)
         const [totalPoints, setTotalPoints] = useState(0)
         const [avgPoints, setAvgPoints] = useState(0)
+        const [topPerformer, setTopPerformer] = useState<{name: string; points: number} | null>(null) 
+
         useEffect(() => {
             async function fetchAmbassadors() {
                 const res = await getAllAmbassadors();
@@ -28,13 +28,18 @@
         useEffect(() => {
             setNumAmbassadors(ambassadorList.length);
             
-            // Calculate total points from the list
             const total = ambassadorList.reduce((sum, ambassador) => sum + (ambassador.points || 0), 0);
             setTotalPoints(total);
             
-            // Calculate average
             if (ambassadorList.length > 0) {
                 setAvgPoints(total / ambassadorList.length);
+                const top = ambassadorList.reduce((max, current) => 
+                    (current.points || 0) > (max.points || 0) ? current : max
+                );
+                setTopPerformer({
+                    name: `${top.first_name} ${top.last_name}`,
+                    points: top.points || 0
+                });
             } else {
                 setAvgPoints(0);
             }
@@ -66,7 +71,7 @@
         StartUp Lab Student Ambassador Point Tracker
       </h1>
       <div className="w-full">
-        <StatsCards totalAmbassadors={numAmbassadors} totalPoints={totalPoints} avgPoints={avgPoints} />
+        <StatsCards totalAmbassadors={numAmbassadors} totalPoints={totalPoints} avgPoints={avgPoints} topPerformer={topPerformer} />
       </div>
       <div className="md:self-end ">
         <AddAmbassadorButton onAmbassadorAdded={handleNewAmbassador} />
