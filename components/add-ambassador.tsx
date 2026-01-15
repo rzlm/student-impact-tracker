@@ -12,7 +12,7 @@ import {
   } from "@/components/ui/alert-dialog"
   import { Input } from "@/components/ui/input"
 import { Plus } from 'lucide-react'
-import { createAmbassador } from '@/actions'
+import { createAmbassador } from '@/lib/supabase/actions'
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { toast } from "sonner"
 import { Ambassador } from '@/lib/types'

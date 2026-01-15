@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { login, signup } from "../actions"
+import { login, signup } from "../lib/supabase/actions"
 import {
   Field,
   FieldDescription,

@@ -6,7 +6,7 @@ import { FieldGroup, FieldLabel, Field } from './ui/field'
 import { Input } from './ui/input'
 import { Plus } from 'lucide-react'
 import {Minus} from 'lucide-react'
-import { addPointsById } from '@/actions'
+import { addPointsById } from '@/lib/supabase/actions'
 import {toast} from "sonner"
 import {
     Dialog,
@@ -19,9 +19,11 @@ import {
   } from "@/components/ui/dialog"
 interface AwardPointsButtonProps  {
     employeeId: number
+    currentPoints: number;
+    onPointsUpdate?: (id: number, newPoints: number) => void; 
 }
 
-const AwardPointsButton: React.FC<AwardPointsButtonProps> = ({ employeeId }) => {
+const AwardPointsButton: React.FC<AwardPointsButtonProps> = ({ employeeId, currentPoints, onPointsUpdate }) => {
     const [points, setPoints] = useState(0)
     const [additionalPoints, setAdditionalPoints] = useState(false)
     const [pointInfo, setPointInfo] = useState(
@@ -36,6 +38,9 @@ const AwardPointsButton: React.FC<AwardPointsButtonProps> = ({ employeeId }) => 
     async function handleInsertPoints() {
         const res = await addPointsById(employeeId, points)
         toast("Successfully Added points!")
+       
+        onPointsUpdate?.(employeeId, currentPoints + points);
+        
 
     }
 

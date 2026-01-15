@@ -20,12 +20,13 @@ import {
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
 import AwardPointsButton from "@/components/award-points-button"
-import { deleteAmbassador } from '@/actions'
+import { deleteAmbassador } from '@/lib/supabase/actions'
 import { toast } from "sonner"
 import { AlertDialog } from './ui/alert-dialog'
 
 type EmployeeCardProps = Ambassador & {
   onDelete?: (id: number) => void
+  onPointsUpdate?: (id: number, newPoints: number) => void;
 }
 
 const EmployeeCard = ({
@@ -35,6 +36,8 @@ const EmployeeCard = ({
   role,
   points,
   onDelete,
+  onPointsUpdate
+  
 }: EmployeeCardProps) => {
 
   const handleDelete = async () => {
@@ -103,7 +106,7 @@ const EmployeeCard = ({
       </CardHeader>
 
       <div className="flex px-4 pb-4 self-end">
-        <AwardPointsButton employeeId={id} />
+        <AwardPointsButton employeeId={id}  currentPoints={points} onPointsUpdate={onPointsUpdate}  />
       </div>
     </Card>
   )

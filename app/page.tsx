@@ -3,7 +3,7 @@
     import EmployeeCard from "@/components/employee-card";
     import AddAmbassadorButton from "@/components/add-ambassador";
     import AmbassadorList from "@/components/ambassador-list";
-    import { getAllAmbassadors, getTotalAmbassadorPoints } from "@/actions";
+    import { getAllAmbassadors, getTotalAmbassadorPoints } from "@/lib/supabase/actions";
     import { useState, useEffect } from "react";
     import { Ambassador } from "@/lib/types";
     import { StatsCards } from "@/components/stats-cards";
@@ -13,32 +13,43 @@
         const [numAmbassadors, setNumAmbassadors] = useState(0)
         const [totalPoints, setTotalPoints] = useState(0)
         const [avgPoints, setAvgPoints] = useState(0)
-
         useEffect(() => {
             async function fetchAmbassadors() {
                 const res = await getAllAmbassadors();
-                const pts = await getTotalAmbassadorPoints()
                 if (res) {
                     setAmbassadorList(res);
-                    setNumAmbassadors(res.length)
-                    setTotalPoints(pts)
-                    
-                    
-                    console.log(ambassadorList.length)
-                    console.log("d", res)
-                    if (numAmbassadors > 0) {
-                        setAvgPoints(totalPoints/numAmbassadors)
-                        console.log(avgPoints)
-                    } else {
-                        setAvgPoints(0)
-                    }
                 }
             }
             
             fetchAmbassadors();
-            
-            console.log(ambassadorList)
         }, []); 
+    
+        // Recalculate stats whenever ambassadorList changes
+        useEffect(() => {
+            setNumAmbassadors(ambassadorList.length);
+            
+            // Calculate total points from the list
+            const total = ambassadorList.reduce((sum, ambassador) => sum + (ambassador.points || 0), 0);
+            setTotalPoints(total);
+            
+            // Calculate average
+            if (ambassadorList.length > 0) {
+                setAvgPoints(total / ambassadorList.length);
+            } else {
+                setAvgPoints(0);
+            }
+        }, [ambassadorList]);
+
+
+        const handlePointsUpdate = (id: number, newPoints: number) => {
+            setAmbassadorList(prev => 
+                prev.map(ambassador => 
+                    ambassador.id === id 
+                        ? { ...ambassador, points: newPoints }
+                        : ambassador
+                )
+            );
+        }
         const handleNewAmbassador = (newAmbassador: Ambassador) => {
             setAmbassadorList(prev => [...prev, newAmbassador]);
         }
@@ -60,7 +71,7 @@
       <div className="md:self-end ">
         <AddAmbassadorButton onAmbassadorAdded={handleNewAmbassador} />
       </div>
-      <AmbassadorList ambassadors={ambassadorList} onDelete={handleDeleteAmbassador} />
+      <AmbassadorList ambassadors={ambassadorList} onDelete={handleDeleteAmbassador} onPointsUpdate={handlePointsUpdate}/>
     </div>
     )
     ;
